@@ -1,0 +1,22 @@
+.user {
+  padding: 20px;
+  text-align: center;
+  background: var(--bg_main);
+  width: calc(100% / 3 - 29px * 2 / 3);
+}
+
+.user__photo {
+  width: 70px;
+  height: 70px;
+  display: block;
+  border-radius: 100%;
+  margin: 0 auto 20px;
+}
+
+.user__name {
+  margin-bottom: 20px;
+}
+
+.user__text {
+  font: 16px/26px var(--mainFont);
+}

@@ -1,0 +1,16 @@
+.button {
+  height: 34px;
+  min-width: 100px;
+  border: none;
+  cursor: pointer;
+  padding: 0 20px;
+  border-radius: 80px;
+  background: var(--primary);
+  font: 16px/26px var(--mainFont);
+  transition: background-color .5s ease;
+
+  &:hover {
+    background: var(--primary_active);
+    transition: background-color .5s ease;
+  }
+}

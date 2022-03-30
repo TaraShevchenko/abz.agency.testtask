@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1170px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 60px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 0 32px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .container {
+        padding: 0 16px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .container {
+        padding: 0 24px;
+    }
+}

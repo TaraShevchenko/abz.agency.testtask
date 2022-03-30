@@ -1,0 +1,17 @@
+.users {
+  text-align: center;
+  margin-bottom: 140px;
+}
+
+.users__title {
+  margin: 0 0 50px 0;
+  color: var(--txt_main);
+  font: 40px/1 var(--mainFont);
+}
+
+.users__list {
+  gap: 29px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}

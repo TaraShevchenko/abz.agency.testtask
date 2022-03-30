@@ -1,0 +1,25 @@
+header {
+  background: var(--bg_main);
+}
+
+.header {
+  display: flex;
+  padding: 13px 0;
+  justify-content: space-between;
+}
+
+.header__logo, .header__logo svg {
+  height: 26px;
+  width: 104px;
+}
+
+.header__button_group {
+  display: flex;
+}
+
+.header__button {
+  margin-right: 10px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
