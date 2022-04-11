@@ -4,8 +4,12 @@ header {
 
 .header {
   display: flex;
-  padding: 13px 0;
+  padding-top: 13px;
+  padding-bottom: 13px;
   justify-content: space-between;
+  @media screen and (max-width: 500px) {
+    align-items: center;
+  }
 }
 
 .header__logo, .header__logo svg {
@@ -19,7 +23,12 @@ header {
 
 .header__button {
   margin-right: 10px;
+
   &:last-child {
     margin-right: 0;
+  }
+
+  @media screen and (max-width: 360px) {
+    margin-right: 5px;
   }
 }

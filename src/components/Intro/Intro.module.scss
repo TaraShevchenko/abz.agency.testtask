@@ -11,6 +11,9 @@
 .intro__text_block {
   width: 380px;
   color: var(--bg_main);
+  @media screen and (max-width: 500px) {
+    width: 288px;
+  }
 }
 
 .intro__title {

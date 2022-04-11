@@ -20,4 +20,8 @@
     background: var(--disabled);
     transition: background-color .5s ease;
   }
+
+  @media screen and (max-width: 360px) {
+    min-width: 80px;
+  }
 }

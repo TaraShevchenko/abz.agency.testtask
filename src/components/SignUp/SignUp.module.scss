@@ -15,6 +15,10 @@
   flex-direction: column;
   max-width: 380px;
   margin: 0 auto;
+
+  @media screen and (max-width: 500px) {
+    max-width: 288px;
+  }
 }
 
 .sign_up__button {

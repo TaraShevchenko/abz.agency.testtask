@@ -54,7 +54,7 @@ const SignUp = () => {
     formData.append("phone", phone);
     if (position) formData.append("position_id",position.filter(item => item.checked).map(item => item.id)[0].toString());
     if (upload) formData.append("photo", upload);
-    setUser(formData, token).then((res) => res.success ? setFormSent(true) : console.log("error"));;
+    setUser(formData, token).then((res) => res.success ? setFormSent(true) : console.log("error"));
   }
 
   const onSubmit = (data: FormEvent) => {
@@ -103,7 +103,6 @@ const SignUp = () => {
     const result = validate && validateString?.input === phone;
     setPhoneValidate(validate && validateString?.input === phone);
     return result;
-
   }
 
   const onUploadChange = (event: FormEvent) => {
@@ -164,7 +163,6 @@ const SignUp = () => {
       <h2 className={style.sign_up__title}>
         {!formSent ? "Working with POST request" : "User successfully registered"}
       </h2>
-
       {!formSent ? <form
         method="post"
         onSubmit={onSubmit}
@@ -198,7 +196,6 @@ const SignUp = () => {
 
         <Button type="submit" className={style.sign_up__button}>Submit</Button>
       </form> : <img src={image} alt="Success"/>}
-
     </div>
   );
 };

@@ -14,4 +14,10 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 50px;
+  @media screen and (max-width: 768px) {
+    gap: 16px;
+  }
+  @media screen and (max-width: 500px) {
+    gap: 0;
+  }
 }

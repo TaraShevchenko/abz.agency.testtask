@@ -24,7 +24,7 @@ const Users: FC = () => {
   const getMoreUsersData = async () => {
     if (users) {
       const usersResponse = await getUsers(`page=${page + 1}&count=6`);
-      setUsers([ ...users, ...usersResponse.users]);
+      setUsers([...users, ...usersResponse.users]);
       setPage(usersResponse.page);
       if (usersResponse.page === usersResponse.total_pages) {
         setGetMore(false);
