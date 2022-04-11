@@ -1,12 +1,15 @@
 :root {
-  --mainFont: Nunito, sans-serif;
+  --main_font: Nunito, sans-serif;
   --primary: #F4E041;
   --primary_active: #FFE302;
   --secondary: #00BDD3;
   --disabled: #B4B4B4;
+  --error: #CB3D40;
   --mutted: #F8F8F8;
   --bg_main: #ffffff;
   --txt_main: #212121;
+  --txt_label: #7e7e7e;
+  --input_border: #D0CFCF;
 }
 
 * {

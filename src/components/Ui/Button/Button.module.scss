@@ -6,11 +6,18 @@
   padding: 0 20px;
   border-radius: 80px;
   background: var(--primary);
-  font: 16px/26px var(--mainFont);
+  font: 16px/26px var(--main_font);
   transition: background-color .5s ease;
 
   &:hover {
     background: var(--primary_active);
+    transition: background-color .5s ease;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: var(--bg_main);
+    background: var(--disabled);
     transition: background-color .5s ease;
   }
 }

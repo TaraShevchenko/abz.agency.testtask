@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from "react";
 import Container from "@components/Ui/Container/Container";
 import Button from "@components/Ui/Button/Button";
 import User from "@components/Users/User/User";
@@ -33,7 +33,7 @@ const Users: FC = () => {
   }
 
   useEffect(() => {
-    // getUsersData();
+    getUsersData();
   }, []);
 
   return (
@@ -46,7 +46,7 @@ const Users: FC = () => {
         {!!users?.length && users.map(el => <User key={el.id} {...el}/>)}
       </div>
 
-      {getMore && <Button onClick={getMoreUsersData} children="Show more"/>}
+      <Button disabled={!getMore} onClick={getMoreUsersData} children="Show more"/>
     </Container>
   );
 };

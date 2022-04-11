@@ -18,5 +18,8 @@
 }
 
 .user__text {
-  font: 16px/26px var(--mainFont);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 16px/26px var(--main_font);
 }

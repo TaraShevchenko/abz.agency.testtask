@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC} from "react";
 import {UserType} from "@customTypes/types";
 import cn from "classnames";
 

@@ -6,39 +6,17 @@
 .sign_up__title {
   margin: 0 0 50px 0;
   color: var(--txt_main);
-  font: 40px/1 var(--mainFont);
+  font: 40px/1 var(--main_font);
 }
 
 .sign_up__form {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
+  max-width: 380px;
+  margin: 0 auto;
 }
 
-.form__input_wrapper {
-  position: relative;
-}
-
-.form__input_label {
-
-}
-
-.form__input {
-  width: 380px;
-  height: 54px;
-  background: unset;
-  border-radius: 4px;
-  padding: 14px 16px;
-  margin-bottom: 50px;
-  color: var(--txt_main);
-  border: 1px solid #D0CFCF;
-  font: 16px/1 var(--mainFont);
-
-  &:focus {
-    outline: none;
-
-    &::placeholder {
-      font-size: 0;
-    }
-  }
+.sign_up__button {
+  align-self: center;
 }

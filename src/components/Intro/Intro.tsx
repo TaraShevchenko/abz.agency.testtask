@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC} from "react";
 import cn from "classnames";
 import Container from "@components/Ui/Container/Container";
 import Button from "@components/Ui/Button/Button";

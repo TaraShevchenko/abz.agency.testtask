@@ -21,3 +21,12 @@ export type UsersResponseType = {
   total_users: number;
   users: UserType[];
 }
+
+export type PositionsType = {
+  id: number;
+  name: string;
+}
+
+export interface PositionRadioElement extends PositionsType{
+  checked: boolean;
+}
