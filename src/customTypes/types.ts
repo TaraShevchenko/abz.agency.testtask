@@ -22,9 +22,25 @@ export type UsersResponseType = {
   users: UserType[];
 }
 
+export type TokenResponseType = {
+  success: boolean;
+  token : string;
+}
+
+export type NewUserResponseType = {
+  success: boolean;
+  user_id : number;
+  message : string;
+}
+
 export type PositionsType = {
   id: number;
   name: string;
+}
+
+export type PositionResponseType = {
+  success: boolean;
+  positions: PositionsType[];
 }
 
 export interface PositionRadioElement extends PositionsType{

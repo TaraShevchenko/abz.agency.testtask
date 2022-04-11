@@ -1,5 +1,6 @@
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 
+import {getPositions, getToken, setUser} from "@services/apiServices";
 import {PositionRadioElement} from "@customTypes/types";
 
 import Input from "@components/Ui/Input/Input";
@@ -11,29 +12,6 @@ import image from "@assets/images/success-image.png";
 
 import style from "@components/SignUp/SignUp.module.scss"
 
-const positions = [
-  {
-    id: 1,
-    checked: false,
-    name: "Security"
-  },
-  {
-    id: 2,
-    checked: false,
-    name: "Designer"
-  },
-  {
-    id: 3,
-    checked: false,
-    name: "Content manager"
-  },
-  {
-    id: 4,
-    checked: false,
-    name: "Lawyer"
-  }
-];
-
 const SignUp = () => {
   const [formSent , setFormSent] = useState<boolean>(false);
 
@@ -44,7 +22,7 @@ const SignUp = () => {
   const [phone, setPhone] = useState<string>("");
   const [phoneValidate, setPhoneValidate] = useState<boolean | undefined>(undefined);
 
-  const [position, setPosition] = useState<PositionRadioElement[] | null>(positions);
+  const [position, setPosition] = useState<PositionRadioElement[] | null>(null);
   const [positionValidate, setPositionValidate] = useState<boolean | undefined>(undefined);
 
   const [upload, setUpload] = useState<File | null>(null);
@@ -53,6 +31,31 @@ const SignUp = () => {
     width: 0,
     height: 0
   });
+
+  const getPositionData = async () => {
+    const positionsResponse = await getPositions().then(response => response.positions.map(position => ({
+      id: position.id,
+      name: position.name,
+      checked: false
+    })));
+
+    setPosition(positionsResponse);
+  }
+
+  useEffect(() => {
+    getPositionData();
+  }, []);
+
+  const setNewUser = async () => {
+    const token: string = await getToken().then(response => response.token);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    if (position) formData.append("position_id",position.filter(item => item.checked).map(item => item.id)[0].toString());
+    if (upload) formData.append("photo", upload);
+    setUser(formData, token).then((res) => res.success ? setFormSent(true) : console.log("error"));;
+  }
 
   const onSubmit = (data: FormEvent) => {
     data.preventDefault();
@@ -64,8 +67,7 @@ const SignUp = () => {
     const positionResult = onPositionValidate();
 
     if (nameResult && emailResult && phoneResult && uploadResult && positionResult) {
-      setFormSent(true);
-      console.log("Отправляем данные");
+      setNewUser();
     }
   };
 
