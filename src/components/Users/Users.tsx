@@ -1,7 +1,6 @@
-import {useEffect, useState, useContext} from "react";
+import {useEffect, useState, FC} from "react";
 import cn from "classnames";
 
-import AppContext from "@context/AppContext";
 import {UserType} from "@customTypes/types";
 import {getUsers} from "@services/apiServices";
 
@@ -11,8 +10,11 @@ import User from "@components/Users/User/User";
 
 import style from "@components/Users/Users.module.scss"
 
-const Users = () => {
-  const context = useContext(AppContext);
+type UsersProps = {
+  reloadUsersBlock: boolean,
+}
+
+const Users:FC<UsersProps> = ({reloadUsersBlock}) => {
 
   const [users, setUsers] = useState<UserType[] | null>(null);
   const [getMore, setGetMore] = useState<boolean>(false);
@@ -37,11 +39,8 @@ const Users = () => {
   }
 
   useEffect(() => {
-    if (context && context.app.usersBlock.reloadUsersBlock) {
-      getUsersData();
-      context.app.usersBlock.setReloadUsersBlock(false);
-    }
-  }, [context!.app.usersBlock.reloadUsersBlock]);
+    getUsersData();
+  }, [reloadUsersBlock]);
 
   useEffect(() => {
     getUsersData();

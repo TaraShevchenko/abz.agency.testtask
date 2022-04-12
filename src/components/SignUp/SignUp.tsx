@@ -1,4 +1,4 @@
-import {FormEvent, useContext, useEffect, useState} from "react";
+import {FormEvent, useEffect, useState, FC} from "react";
 import cn from "classnames";
 
 import {getPositions, getToken, setUser} from "@services/apiServices";
@@ -12,9 +12,12 @@ import UploadInput from "@components/Ui/UploadInput/UploadInput";
 import image from "@assets/images/success-image.png";
 
 import style from "@components/SignUp/SignUp.module.scss"
-import AppContext from "@context/AppContext";
 
-const SignUp = () => {
+type SignUpProps = {
+  setReloadUsersBlock: (value: boolean) => void,
+}
+
+const SignUp:FC<SignUpProps> = ({setReloadUsersBlock}) => {
   const [formSent , setFormSent] = useState<boolean>(false);
 
   const [name, setName] = useState<string>("");
@@ -33,8 +36,6 @@ const SignUp = () => {
     width: 0,
     height: 0
   });
-
-  const context = useContext(AppContext);
 
   const getPositionData = async () => {
     const positionsResponse = await getPositions().then(response => response.positions.map(position => ({
@@ -73,7 +74,7 @@ const SignUp = () => {
     if (nameResult && emailResult && phoneResult && uploadResult && positionResult) {
 
       setNewUser().then(() => {
-        context && context.app.usersBlock.setReloadUsersBlock(true);
+        setReloadUsersBlock(true);
       });
     }
   };
@@ -92,7 +93,7 @@ const SignUp = () => {
   };
 
   const onEmailValidate = () => {
-    const validateString = email.match(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/);
+    const validateString = email.match(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)])$/);
     const validate = email.length > 2 && email.length < 100;
     const result = validate && validateString?.join("") === email;
     setEmailValidate(validate && validateString?.input === email);
@@ -105,7 +106,7 @@ const SignUp = () => {
   };
 
   const onPhoneValidate = () => {
-    const validateString = phone.match(/^[\+]{0,1}380([0-9]{9})$/);
+    const validateString = phone.match(/^[/+]{0,1}380([0-9]{9})$/);
     const validate = phone.length === 13;
     const result = validate && validateString?.input === phone;
     setPhoneValidate(validate && validateString?.input === phone);
