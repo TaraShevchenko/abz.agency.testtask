@@ -41,7 +41,7 @@ const Users = () => {
       getUsersData();
       context.app.usersBlock.setReloadUsersBlock(false);
     }
-  }, [!!context && context.app.usersBlock.reloadUsersBlock]);
+  }, [context!.app.usersBlock.reloadUsersBlock]);
 
   useEffect(() => {
     getUsersData();
