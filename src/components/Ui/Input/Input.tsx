@@ -17,7 +17,7 @@ const Input: FC<InputProps> = ({label, value, onChange, validate, helpText}) => 
     {[style.active]: value}
   )}>
       <label className={style.input__label}>{label}</label>
-      <input className={style.input} type="text" value={value} onChange={onChange}/>
+      <input className={style.input} tabIndex={0} aria-label={label} type="text" value={value} onChange={onChange}/>
     {!!helpText && <span className={style.input__help_text}>{helpText}</span>}
     </span>
 );

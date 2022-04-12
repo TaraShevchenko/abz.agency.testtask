@@ -11,7 +11,11 @@ type UploadInputProps = {
 
 const UploadInput: FC<UploadInputProps> = ({validate, onChange, value}) => (
   <div className={style.upload__wrapper}>
-    <label className={cn(style.upload, {[style.error]: typeof validate !== "undefined" && !validate})}>
+    <label
+      className={cn(style.upload, {[style.error]: typeof validate !== "undefined" && !validate})}
+      tabIndex={0}
+      aria-label="Upload image"
+    >
       <span className={style.upload__button}>Upload</span>
       <input className={style.upload__input} onChange={onChange} type="file" name="upload"/>
       <span className={style.upload__file_name}>

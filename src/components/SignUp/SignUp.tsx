@@ -59,12 +59,16 @@ const SignUp:FC<SignUpProps> = ({setReloadUsersBlock}) => {
     formData.append("phone", phone);
     if (position) formData.append("position_id",position.filter(item => item.checked).map(item => item.id)[0].toString());
     if (upload) formData.append("photo", upload);
-    setUser(formData, token).then((res) => res.success ? setFormSent(true) : console.log("error"));
+    setUser(formData, token).then((response) => {
+      if (response.success) {
+        setFormSent(true);
+        setReloadUsersBlock(true);
+      }
+    });
   }
 
   const onSubmit = (data: FormEvent) => {
     data.preventDefault();
-
     const nameResult = onNameValidate();
     const emailResult = onEmailValidate();
     const phoneResult = onPhoneValidate();
@@ -72,10 +76,7 @@ const SignUp:FC<SignUpProps> = ({setReloadUsersBlock}) => {
     const positionResult = onPositionValidate();
 
     if (nameResult && emailResult && phoneResult && uploadResult && positionResult) {
-
-      setNewUser().then(() => {
-        setReloadUsersBlock(true);
-      });
+      setNewUser();
     }
   };
 
@@ -93,10 +94,10 @@ const SignUp:FC<SignUpProps> = ({setReloadUsersBlock}) => {
   };
 
   const onEmailValidate = () => {
-    const validateString = email.match( /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const validateArr = email.match( /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     const validate = email.length > 2 && email.length < 100;
-    const result = validate && validateString?.join("") === email;
-    setEmailValidate(validate && validateString?.input === email);
+    const result = validate && validateArr![0] === email;
+    setEmailValidate(validate && validateArr?.input === email);
     return result;
   };
 
@@ -194,7 +195,7 @@ const SignUp:FC<SignUpProps> = ({setReloadUsersBlock}) => {
           label="Phone"
           value={phone}
           validate={phoneValidate}
-          helpText="+38 (XXX) XXX - XX - XX"
+          helpText="+38 (0XX) XXX - XX - XX"
           onChange={onPhoneChange}
         />
 
