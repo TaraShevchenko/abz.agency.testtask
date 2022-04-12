@@ -5,7 +5,8 @@
       "@customTypes/*": ["./customTypes/*"],
       "@assets/*": ["./assets/*"],
       "@services/*": ["./services/*"],
-      "@components/*": ["./components/*"]
+      "@components/*": ["./components/*"],
+      "@context/*": ["./context/*"]
     }
   }
 }

@@ -1,4 +1,5 @@
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, useContext, useEffect, useState} from "react";
+import cn from "classnames";
 
 import {getPositions, getToken, setUser} from "@services/apiServices";
 import {PositionRadioElement} from "@customTypes/types";
@@ -11,6 +12,7 @@ import UploadInput from "@components/Ui/UploadInput/UploadInput";
 import image from "@assets/images/success-image.png";
 
 import style from "@components/SignUp/SignUp.module.scss"
+import AppContext from "@context/AppContext";
 
 const SignUp = () => {
   const [formSent , setFormSent] = useState<boolean>(false);
@@ -31,6 +33,8 @@ const SignUp = () => {
     width: 0,
     height: 0
   });
+
+  const context = useContext(AppContext);
 
   const getPositionData = async () => {
     const positionsResponse = await getPositions().then(response => response.positions.map(position => ({
@@ -67,7 +71,10 @@ const SignUp = () => {
     const positionResult = onPositionValidate();
 
     if (nameResult && emailResult && phoneResult && uploadResult && positionResult) {
-      setNewUser();
+
+      setNewUser().then(() => {
+        context && context.app.usersBlock.setReloadUsersBlock(true);
+      });
     }
   };
 
@@ -159,7 +166,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className={style.sign_up}>
+    <div className={cn(style.sign_up, "signUpBlock")}>
       <h2 className={style.sign_up__title}>
         {!formSent ? "Working with POST request" : "User successfully registered"}
       </h2>

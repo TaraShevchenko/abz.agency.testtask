@@ -1,24 +1,28 @@
-import {FC, useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
+import cn from "classnames";
+
+import AppContext from "@context/AppContext";
+import {UserType} from "@customTypes/types";
+import {getUsers} from "@services/apiServices";
+
 import Container from "@components/Ui/Container/Container";
 import Button from "@components/Ui/Button/Button";
 import User from "@components/Users/User/User";
 
-import {UserType} from "@customTypes/types";
-import {getUsers} from "@services/apiServices";
-
 import style from "@components/Users/Users.module.scss"
 
-const Users: FC = () => {
+const Users = () => {
+  const context = useContext(AppContext);
+
   const [users, setUsers] = useState<UserType[] | null>(null);
   const [getMore, setGetMore] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
   const getUsersData = async () => {
     const usersResponse = await getUsers("page=1&count=6");
+    setPage(usersResponse.page);
     setUsers(usersResponse.users);
-    if (usersResponse.total_pages > 1) {
-      setGetMore(true);
-    }
+    setGetMore(usersResponse.total_pages > 1);
   }
 
   const getMoreUsersData = async () => {
@@ -33,11 +37,18 @@ const Users: FC = () => {
   }
 
   useEffect(() => {
+    if (context && context.app.usersBlock.reloadUsersBlock) {
+      getUsersData();
+      context.app.usersBlock.setReloadUsersBlock(false);
+    }
+  }, [!!context && context.app.usersBlock.reloadUsersBlock]);
+
+  useEffect(() => {
     getUsersData();
   }, []);
 
   return (
-    <Container className={style.users}>
+    <Container className={cn(style.users, "usersBlock")}>
       <h2 className={style.users__title}>
         Working with GET request
       </h2>

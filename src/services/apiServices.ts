@@ -1,6 +1,6 @@
 import {PositionResponseType, UsersResponseType, NewUserResponseType, TokenResponseType} from "@customTypes/types";
-import {BASE_URL} from "@customTypes/constants";
 
+const BASE_URL = "https://frontend-test-assignment-api.abz.agency/api/v1/"
 async function API(url: string, catchAnswer = {}, options? : {method: string, headers?: HeadersInit ,body?: BodyInit}) {
   try {
     const response = await fetch(BASE_URL + url, {
