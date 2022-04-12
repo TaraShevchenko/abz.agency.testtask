@@ -5,11 +5,13 @@ import {scrollToElement} from "@services/scrollService";
 import Container from "@components/Ui/Container/Container";
 import Button from "@components/Ui/Button/Button";
 
-import IntroBg from "@assets/images/Intro.png"
-import style from "@components/Intro/Intro.module.scss"
+import IntroBg from "@assets/images/Intro.png";
+import IntroMobileBg from "@assets/images/IntroMobile.png";
+import style from "@components/Intro/Intro.module.scss";
 
 const Intro = () => (
-  <Container styles={{backgroundImage: `url(${IntroBg})`}} className={style.intro}>
+  <Container styles={{backgroundImage: `url(${window.innerWidth > 500 ? IntroBg : IntroMobileBg})`}}
+             className={style.intro}>
     <h1 className={cn(style.intro__title, style.intro__text_block)}>
       Test assignment for front-end developer
     </h1>
