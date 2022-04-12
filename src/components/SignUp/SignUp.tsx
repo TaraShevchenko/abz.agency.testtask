@@ -94,12 +94,7 @@ const SignUp:FC<SignUpProps> = ({setReloadUsersBlock}) => {
 
   const onEmailValidate = () => {
     const validateString = email.match( /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-    console.log("validateString", validateString);
-
     const validate = email.length > 2 && email.length < 100;
-    console.log("validate", validate);
-
     const result = validate && validateString?.join("") === email;
     setEmailValidate(validate && validateString?.input === email);
     return result;
