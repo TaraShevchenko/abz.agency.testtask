@@ -40,11 +40,7 @@ const Users:FC<UsersProps> = ({reloadUsersBlock}) => {
 
   useEffect(() => {
     getUsersData();
-  }, [reloadUsersBlock]);
-
-  useEffect(() => {
-    getUsersData();
-  }, []);
+  }, [reloadUsersBlock]);;
 
   return (
     <Container className={cn(style.users, "usersBlock")}>
