@@ -1,4 +1,4 @@
-import {FC, FormEvent} from "react";
+import {FC, ChangeEvent} from "react";
 import cn from "classnames";
 
 import style from "@components/Ui/Input/Input.module.scss";
@@ -8,7 +8,7 @@ type InputProps = {
   value: string;
   helpText?: string;
   validate?: boolean;
-  onChange: (event: FormEvent) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input: FC<InputProps> = ({label, value, onChange, validate, helpText}) => (
@@ -16,10 +16,10 @@ const Input: FC<InputProps> = ({label, value, onChange, validate, helpText}) => 
     {[style.error]: typeof validate !== "undefined" && !validate},
     {[style.active]: value}
   )}>
-      <label className={style.input__label}>{label}</label>
-      <input className={style.input} tabIndex={0} aria-label={label} type="text" value={value} onChange={onChange}/>
+    <label className={style.input__label}>{label}</label>
+    <input className={style.input} tabIndex={0} aria-label={label} type="text" value={value} onChange={onChange}/>
     {!!helpText && <span className={style.input__help_text}>{helpText}</span>}
-    </span>
+  </span>
 );
 
 export default Input;
