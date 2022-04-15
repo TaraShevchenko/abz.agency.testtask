@@ -14,8 +14,10 @@ const Intro = () => {
     scrollToElement("signUpBlock");
   }
 
+  const css = {backgroundImage: `url(${window.innerWidth > 500 ? IntroBg : IntroMobileBg})`};
+
   return (
-    <Container styles={{backgroundImage: `url(${window.innerWidth > 500 ? IntroBg : IntroMobileBg})`}}
+    <Container style={css}
                className={style.intro}>
       <h1 className={cn(style.intro__title, style.intro__text_block)}>
         Test assignment for front-end developer

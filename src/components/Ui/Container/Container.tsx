@@ -6,7 +6,7 @@ import "./Container.scss";
 type ContainerProps = {
   className?: string;
   children?: ReactNode;
-  styles?: CSSProperties;
+  style?: CSSProperties;
 }
 
 const Container: FC<ContainerProps> = ({ className, ...props }) => (
